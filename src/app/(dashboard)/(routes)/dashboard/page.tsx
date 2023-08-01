@@ -75,7 +75,6 @@ export default function DashboardPage() {
             <ArrowRight className="w-5 h-5" />
           </Card>
         ))}
-
       </div>
     </div>
   )
