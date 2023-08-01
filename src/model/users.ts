@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     userId: {
@@ -20,4 +20,12 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Users", userSchema);
+let model: Model<Document>
+
+try {
+    model = mongoose.model('User') as Model<Document>;
+  } catch {
+    // If the model doesn't exist, create it
+    model = mongoose.model<Document>('User', userSchema);
+  }
+export default model;

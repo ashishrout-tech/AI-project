@@ -51,8 +51,11 @@ const CodePage = () => {
             setMessages((current) => [...current, userMessage, response.data.message]);
 
             form.reset();
-        } catch (err: any) {
-            console.error(err);
+        } catch (error: any) {
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
+            console.error(error);
         } finally {
             router.refresh();
         }
