@@ -63,6 +63,13 @@ export const checkApiLimit = async () => {
 }
 
 export const getApiLimitCount = async () => {
+    try {
+        const response = await connectToDatabase();
+        console.log(response.message)
+    } catch (error) {
+        console.log((error as Error).message)
+    }
+
     const {userId} = auth();
 
     if(!userId){
@@ -74,7 +81,7 @@ export const getApiLimitCount = async () => {
         if(!user){
             return 0;
         }
-        return user.count;
+        return user.count
 
     } catch (error) {
         console.log((error as Error).message);

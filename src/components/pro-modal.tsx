@@ -1,5 +1,8 @@
 "use client";
 
+import { useRecoilState } from "recoil";
+import { proModalState } from "@/app/recoil-atom/pro-modal";
+
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "./ui/badge";
 import { Check, Code, Image, MessageSquare, Music, Video, Zap } from "lucide-react"
@@ -42,8 +45,10 @@ const tools = [
 ]
 
 export const ProModal = () => {
+    const[open, setOpen] = useRecoilState(proModalState);
+
     return (
-        <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
+        <Dialog open={open} onOpenChange={() => setOpen(false)}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">

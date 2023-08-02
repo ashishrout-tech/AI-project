@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 
 import { ArrowRight, Code, Image, MessageSquare, Music, Video } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const tools = [
   {
@@ -45,7 +46,18 @@ const tools = [
 ]
 
 export default function DashboardPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, [])
+
+  if(!isMounted){
+    return null;
+  }
+  
+
 
   return (
     <div>

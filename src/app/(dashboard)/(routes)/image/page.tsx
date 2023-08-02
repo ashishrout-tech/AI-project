@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from 'next/navigation';
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
+import { useSetRecoilState } from 'recoil';
+import { proModalState } from '@/app/recoil-atom/pro-modal';
 
 
 import { Heading } from "@/components/heading";
@@ -16,14 +18,13 @@ import { Button } from "@/components/ui/button";
 import { useState } from 'react';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
-import { cn } from '@/lib/utils';
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
 
 const ImagePage = () => {
+    const setOpen = useSetRecoilState(proModalState);
+
     const router = useRouter();
     const [images, setImages] = useState<string[]>([])
 
@@ -51,7 +52,7 @@ const ImagePage = () => {
             form.reset();
         } catch (error: any) {
             if(error?.response?.status === 403){
-                proModal.onOpen();
+                setOpen(true);
             }
             console.error(error);
         } finally {

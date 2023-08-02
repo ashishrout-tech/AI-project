@@ -1,27 +1,21 @@
 "use client"
 
-import { useEffect, useState } from "react";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { useSetRecoilState } from "recoil";
+import { proModalState } from "@/app/recoil-atom/pro-modal";
 
 interface FreeCounterProps {
     apiLimitCount: number;
 };
 
 export const FreeCounter = ({apiLimitCount}: FreeCounterProps) => {
-    const proModal = useProModal();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-
-    if(!mounted){
-        return null;
+    const setOpen = useSetRecoilState(proModalState);
+    const onPress = () => {
+        setOpen(true);
     }
 
     return (
@@ -37,7 +31,7 @@ export const FreeCounter = ({apiLimitCount}: FreeCounterProps) => {
                             value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
                         />
                     </div>
-                    <Button onClick={proModal.onOpen} className="w-full" variant="premium">
+                    <Button onClick={onPress} className="w-full" variant="premium">
                         Upgrade
                         <Zap className="w-4 h-4 ml-2 fill-white" />
                     </Button>

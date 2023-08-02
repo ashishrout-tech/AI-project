@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from 'next/navigation';
 import { formSchema } from "./constants";
+import { useSetRecoilState} from 'recoil';
+import { proModalState } from '@/app/recoil-atom/pro-modal';
 
 
 import { Heading } from "@/components/heading";
@@ -23,6 +25,8 @@ import { BotAvatar } from '@/components/bot-avatar';
 import ReactMarkdown from "react-markdown";
 
 const CodePage = () => {
+    const setOpen = useSetRecoilState(proModalState);
+
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
@@ -53,7 +57,7 @@ const CodePage = () => {
             form.reset();
         } catch (error: any) {
             if(error?.response?.status === 403){
-                proModal.onOpen();
+                setOpen(true);
             }
             console.error(error);
         } finally {
