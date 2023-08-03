@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Layout2 from './layout2'
+import { CrispProvider } from '@/components/crisp-provider'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,6 +17,7 @@ export default function RootLayout( {children}: {children: React.ReactNode} ) {
   return (
     <ClerkProvider>
         <html lang="en">
+          <CrispProvider />
           <body className={inter.className}>
             <Layout2 children = {children} />
           </body>

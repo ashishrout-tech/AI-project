@@ -10,12 +10,18 @@ import { proModalState } from "@/app/recoil-atom/pro-modal";
 
 interface FreeCounterProps {
     apiLimitCount: number;
+    isPro: boolean,
 };
 
-export const FreeCounter = ({apiLimitCount}: FreeCounterProps) => {
+export const FreeCounter = ({apiLimitCount = 0, isPro = false}: FreeCounterProps) => {
     const setOpen = useSetRecoilState(proModalState);
     const onPress = () => {
         setOpen(true);
+    }
+
+    if(isPro){
+        return <>
+        </>
     }
 
     return (

@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    count:{
+    count: {
         type: Number,
         default: 0
     },
@@ -24,8 +24,8 @@ let model: Model<Document>
 
 try {
     model = mongoose.model('User') as Model<Document>;
-  } catch {
+} catch {
     // If the model doesn't exist, create it
     model = mongoose.model<Document>('User', userSchema);
-  }
+}
 export default model;

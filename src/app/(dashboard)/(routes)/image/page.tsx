@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
 import { useSetRecoilState } from 'recoil';
 import { proModalState } from '@/app/recoil-atom/pro-modal';
+import { toast } from 'react-hot-toast';
 
 
 import { Heading } from "@/components/heading";
@@ -53,6 +54,8 @@ const ImagePage = () => {
         } catch (error: any) {
             if(error?.response?.status === 403){
                 setOpen(true);
+            } else {
+                toast.error("Something went wrong");
             }
             console.error(error);
         } finally {

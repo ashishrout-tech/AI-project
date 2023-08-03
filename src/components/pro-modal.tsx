@@ -9,6 +9,9 @@ import { Check, Code, Image, MessageSquare, Music, Video, Zap } from "lucide-rea
 import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 
 const tools = [
@@ -46,6 +49,20 @@ const tools = [
 
 export const ProModal = () => {
     const[open, setOpen] = useRecoilState(proModalState);
+    const [loading, setLoading] = useState(false);
+
+    const onSubscribe = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get("/api/stripe");
+            window.location.href = response.data.url;
+        } catch(error) {
+            console.log(error, "STRIPE_CLIENT_ERROR");
+            toast.error("Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <Dialog open={open} onOpenChange={() => setOpen(false)}>
@@ -80,6 +97,8 @@ export const ProModal = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <Button
+                        disabled={loading}
+                        onClick={onSubscribe}
                         size="lg"
                         variant="premium"
                         className="w-full"
