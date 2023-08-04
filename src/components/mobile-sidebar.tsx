@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "@/components/sidebar";
 
 interface MobileSidebarprops {
-    apiLimitCount: number,
+    apiLimitCount?: number,
     isPro: boolean
 }
 const MobileSidebar = ({ apiLimitCount = 0, isPro = false }: MobileSidebarprops) => {
