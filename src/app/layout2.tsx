@@ -6,7 +6,7 @@ import { RecoilRoot } from 'recoil';
 import { ModalProvider } from '@/components/modal-provider'
 import { ToastProvider } from '@/components/toaster-provider';
 
-const Layout2 = ({ children }: { children: React.ReactNode }) => {
+const Layout2 = ({ content }: { content: React.ReactNode }) => {
 
     const [isMounted, setIsMounted] = useState(false);
 
@@ -24,7 +24,7 @@ const Layout2 = ({ children }: { children: React.ReactNode }) => {
             <RecoilRoot>
                 <ModalProvider />
                 <ToastProvider />
-                {children}
+                {content}
             </RecoilRoot>
         </>
     )

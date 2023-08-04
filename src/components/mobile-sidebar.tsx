@@ -8,7 +8,7 @@ interface MobileSidebarprops {
     apiLimitCount: number,
     isPro: boolean
 }
-const MobileSidebar = ({apiLimitCount = 0, isPro= false}: MobileSidebarprops) => {
+const MobileSidebar = ({ apiLimitCount = 0, isPro = false }: MobileSidebarprops) => {
 
 
     return (

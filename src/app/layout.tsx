@@ -19,7 +19,8 @@ export default function RootLayout( {children}: {children: React.ReactNode} ) {
         <html lang="en">
           <CrispProvider />
           <body className={inter.className}>
-            <Layout2 children = {children} />
+           {/* eslint-disable-next-line react/prop-types */}
+            <Layout2 content = {children} />
           </body>
         </html>
     </ClerkProvider>

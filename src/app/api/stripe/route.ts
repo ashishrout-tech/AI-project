@@ -14,20 +14,20 @@ export async function GET() {
         connectToDatabase();
     } catch (error) {
         console.log("DATABASE ERROR", error)
-        return new NextResponse("Internal error", {status: 500});
+        return new NextResponse("Internal error", { status: 500 });
     }
 
     try {
-        const {userId} = auth();
+        const { userId } = auth();
         const user = await currentUser();
 
-        if(!userId || !user){
+        if (!userId || !user) {
             return new NextResponse("Unauthorised", { status: 401 });
         }
 
-        const userSubscription = await UserSubscription.findOne({userId});
+        const userSubscription = await UserSubscription.findOne({ userId });
 
-        if(userSubscription && userSubscription.stripeCustomerId){
+        if (userSubscription && userSubscription.stripeCustomerId) {
             const stripeSession = await stripe.billingPortal.sessions.create({
                 customer: userSubscription.stripeCustomerId,
                 return_url: settingsUrl,
@@ -67,6 +67,6 @@ export async function GET() {
 
     } catch (error) {
         console.log("[STRIPE ERROR]", error);
-        return new NextResponse("Internal error", {status: 500});
+        return new NextResponse("Internal error", { status: 500 });
     }
 }
