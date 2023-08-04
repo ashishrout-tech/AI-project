@@ -1,5 +1,13 @@
 import mongoose, { Document, Model } from 'mongoose';
 
+interface UserDocument extends Document {
+    _id: mongoose.Types.ObjectId;
+    userId: String;
+    count: number;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 const userSchema = new mongoose.Schema({
     userId: {
         type: String,
@@ -20,12 +28,12 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-let model: Model<Document>
+let model: Model<UserDocument>
 
 try {
-    model = mongoose.model('User') as Model<Document>;
+    model = mongoose.model('User') as Model<UserDocument>;
 } catch {
     // If the model doesn't exist, create it
-    model = mongoose.model<Document>('User', userSchema);
+    model = mongoose.model<UserDocument>('User', userSchema);
 }
 export default model;
